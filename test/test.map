@@ -1,0 +1,15 @@
+---
+- !ruby/object:Skanner::Match
+  args:
+    :start: ! '#include <mplshlib.h>'
+    :stop: ! 'return(kv->toMapleNULL()); }'
+    :repl: ! '//skip!'
+- !ruby/object:Skanner::Match
+  args:
+    :start: ! '  char *buf;   /* Error message */'
+    :add: ! 'Text to be inserted #1'
+- !ruby/object:Skanner::Match
+  args:
+    :start: ! 'Start of subst #2'
+    :stop: ! 'Stop of subst #2'
+    :repl: ! 'Text to be inserted #1'

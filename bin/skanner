@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# skanner.rb
+
+# Created by Paolo Bosetti on 2012-03-16.
+# Copyright (c) 2012 University of Trento. All rights reserved.
+
+require "commander/import"
+require File.expand_path(File.dirname(__FILE__) + '/../lib/skanner')
+
+include Skanner
+
+program :name, "Skanner"
+program :version, Skanner::VERSION
+program :description, "Text scanner to perform predefined substitutions"
+
+command :stub do |c|
+  c.syntax = "skanner stub <n> <file.map>"
+  c.description = "Creates a stub map with <n> entries and saves it as <file.map>"
+  c.action do |args, options|
+    n, map_file = args[0..1]
+    begin
+      Skanner.write_stub(map_file, n.to_i)
+      puts "Created file #{map_file}"
+    rescue
+      puts "Syntax is:"
+      puts c.syntax
+    end
+  end
+end
+
+command :skan do |c|
+  c.syntax = "skanner skan <input_file> <map_file>"
+  c.description = "Applies the map in <map_file> to the input file <input_file>"
+  c.action do |args, options|
+    input_file, map_file = args[0..1]
+    begin
+      Skanner.run_on(input_file, map_file)
+    rescue
+      puts "Syntax is:"
+      puts c.syntax
+    end
+  end
+end
