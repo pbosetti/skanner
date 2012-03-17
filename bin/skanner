@@ -35,7 +35,8 @@ command :skan do |c|
     input_file, map_file = args[0..1]
     begin
       Skanner.run_on(input_file, map_file)
-    rescue
+    rescue => e
+      p e
       puts "Syntax is:"
       puts c.syntax
     end
