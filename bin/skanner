@@ -42,3 +42,12 @@ command :skan do |c|
     end
   end
 end
+
+command :check do |c|
+  c.syntax = "skanner check <map_file>"
+  c.description = "Shows interpretation of <map_file>"
+  c.action do |args, options|
+    map_file = args[0]
+    Skanner.check(map_file)
+  end
+end

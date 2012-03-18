@@ -11,7 +11,7 @@
 - !ruby/object:Skanner::Match
   args:
     :start: ! 'if(S->err==-1) kv->error(S->buf);'
-    :add: ! '// Removed line'
+    :repl: ! '// Removed line'
 - !ruby/object:Skanner::Match
   args:
     :start: ! 'static void inpfn(double T, double *U)'
@@ -20,7 +20,7 @@
 - !ruby/object:Skanner::Match
   args:
     :start: ! 'inpfn(S->w[0],u);'
-    :repl: ! '(S->inpfn)(S->w[0],u);'
+    :repl: ! '  (S->inpfn)(S->w[0],u);'
 - !ruby/object:Skanner::Match
   args:
     :start: ! 'EXP long M_DECL ParamDriverC(double t0, double dt, long npts, double *ic, double *p, double *out, char *errbuf, long internal)'
@@ -28,9 +28,13 @@
 - !ruby/object:Skanner::Match
   args:
     :start: ! 'S.w=w;'
-    :add: ! 'S.inpfn=inpfn;'
+    :add: ! '  S.inpfn=inpfn;'
 - !ruby/object:Skanner::Match
   args:
     :start: ! 'EXP ALGEB M_DECL ParamDriver( MKernelVector kv_in, ALGEB *args )'
-    :stop: ! "return(outd);\n}"
+    :stop: ! "return(outd);"
     :repl: ! '// Removed function ParamDriver'
+- !ruby/object:Skanner::Match
+  args:
+    :start: ! '}'
+    :del: ! ''

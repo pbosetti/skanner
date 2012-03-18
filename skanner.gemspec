@@ -4,8 +4,8 @@ require File.expand_path('../lib/skanner/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Paolo Bosetti"]
   gem.email         = ["paolo.bosetti@ing.unitn.it"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Simple command to perform automated edits on text files}
+  gem.summary       = %q{Simple command to perform automated edits on text files}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
@@ -14,4 +14,5 @@ Gem::Specification.new do |gem|
   gem.name          = "skanner"
   gem.require_paths = ["lib"]
   gem.version       = Skanner::VERSION
+  gem.add_runtime_dependency("commander", ">= 1.1.1")
 end
